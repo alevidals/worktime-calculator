@@ -9,23 +9,11 @@ import {
 } from "./ui/table";
 import { randomUUID } from "crypto";
 import { getWorkTime } from "@/lib/issues";
+import { useAtom, useAtomValue } from "jotai";
+import { issuesAtom } from "@/lib/store";
+import { IssuesTableActions } from "./issues-table-actions";
 
-export function IssuesTable() {
-  const issues: Issue[] = [
-    {
-      id: randomUUID(),
-      name: "Add dark mode",
-      startTime: "9:00",
-      endTime: "10:00",
-    },
-    {
-      id: randomUUID(),
-      name: "Add light mode",
-      startTime: "9:00",
-      endTime: "10:00",
-    },
-  ];
-
+export function IssuesTable({ issues }: { issues: Issue[] }) {
   return (
     <Table>
       <TableHeader>
@@ -49,7 +37,9 @@ export function IssuesTable() {
                 endTime: issue.endTime,
               })}
             </TableCell>
-            <TableCell></TableCell>
+            <TableCell>
+              <IssuesTableActions issue={issue} />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
