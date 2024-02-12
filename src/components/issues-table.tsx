@@ -1,4 +1,6 @@
+import { getWorkTime } from "@/lib/issues";
 import { Issue } from "@/lib/types";
+import { IssuesTableActions } from "./issues-table-actions";
 import {
   Table,
   TableBody,
@@ -7,11 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { randomUUID } from "crypto";
-import { getWorkTime } from "@/lib/issues";
-import { useAtom, useAtomValue } from "jotai";
-import { issuesAtom } from "@/lib/store";
-import { IssuesTableActions } from "./issues-table-actions";
 
 export function IssuesTable({ issues }: { issues: Issue[] }) {
   return (

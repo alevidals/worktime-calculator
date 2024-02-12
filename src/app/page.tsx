@@ -14,13 +14,7 @@ export default function Home() {
         <h1 className="text-2xl font-bold">Hello! 🔥</h1>
         <AddIssueButton />
       </div>
-      {issues.length > 0 ? (
-        <IssuesTable issues={issues} />
-      ) : (
-        <p className="text-gray-500">
-          You don&apos;t have any issues yet. Click the button above to add one.
-        </p>
-      )}
+      <IssuesTable issues={issues} />
     </main>
   );
 }

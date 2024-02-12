@@ -1,8 +1,9 @@
 "use client";
 
-import { TrashIcon } from "@radix-ui/react-icons";
-import { Button } from "./ui/button";
+import { issuesAtom } from "@/lib/store";
 import { Issue } from "@/lib/types";
+import { TrashIcon } from "@radix-ui/react-icons";
+import { useAtom } from "jotai";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,8 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { useAtom } from "jotai";
-import { issuesAtom } from "@/lib/store";
+import { Button } from "./ui/button";
 
 export function IssuesTableActions({ issue }: { issue: Issue }) {
   const [issues, setIssues] = useAtom(issuesAtom);
@@ -23,7 +23,6 @@ export function IssuesTableActions({ issue }: { issue: Issue }) {
   function handleDeleteIssue() {
     const updatedIssues = issues.filter((i) => i.id !== issue.id);
     setIssues(updatedIssues);
-    localStorage.setItem("issues", JSON.stringify(updatedIssues));
   }
 
   return (

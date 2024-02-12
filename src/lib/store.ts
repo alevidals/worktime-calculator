@@ -1,8 +1,4 @@
-import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 import { Issue } from "./types";
 
-const issues = localStorage.getItem("issues");
-
-export const issuesAtom = atom<Issue[]>(
-  issues ? (JSON.parse(issues) as Issue[]) : []
-);
+export const issuesAtom = atomWithStorage<Issue[]>("issues", []);

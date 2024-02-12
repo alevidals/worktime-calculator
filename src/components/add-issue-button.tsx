@@ -1,6 +1,14 @@
 "use client";
 
+import { addIssueSchema } from "@/lib/schema";
+import { issuesAtom } from "@/lib/store";
+import { AddIssue, Issue } from "@/lib/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { useSetAtom } from "jotai";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -9,13 +17,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "./ui/dialog";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addIssueSchema } from "@/lib/schema";
-import { AddIssue, Issue } from "@/lib/types";
-import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -25,9 +27,6 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
-import { useState } from "react";
-import { useSetAtom } from "jotai";
-import { issuesAtom } from "@/lib/store";
 
 export function AddIssueButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,20 +44,10 @@ export function AddIssueButton() {
       endTime: data.endTime,
     };
 
-    const issues = localStorage.getItem("issues");
-
-    if (issues) {
-      localStorage.setItem(
-        "issues",
-        JSON.stringify([...JSON.parse(issues), newIssue])
-      );
-    } else {
-      localStorage.setItem("issues", JSON.stringify([newIssue]));
-    }
-
     toast.success("Issue added successfully");
 
     setIssues((prev) => [...prev, newIssue]);
+
     setIsOpen(false);
     form.reset();
   }
