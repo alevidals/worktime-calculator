@@ -1,9 +1,6 @@
-"use client";
-
 import { issuesAtom } from "@/lib/store";
-import { Issue } from "@/lib/types";
 import { TrashIcon } from "@radix-ui/react-icons";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,32 +14,31 @@ import {
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
 
-export function IssuesTableActions({ issue }: { issue: Issue }) {
-  const [issues, setIssues] = useAtom(issuesAtom);
-
-  function handleDeleteIssue() {
-    const updatedIssues = issues.filter((i) => i.id !== issue.id);
-    setIssues(updatedIssues);
-  }
+export function DeleteIssuesButton() {
+  const setIssues = useSetAtom(issuesAtom);
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="icon" variant="ghost">
-          <TrashIcon className="h-5 w-5 text-red-700" />
+        <Button
+          size="icon"
+          variant="destructive"
+          className="fixed bottom-4 right-4"
+        >
+          <TrashIcon className="w-5 h-5" />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the issue
-            &quot;{issue.name}&quot;.
+            This action cannot be undone. This will permanently delete all the
+            issues.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteIssue}>
+          <AlertDialogAction onClick={() => setIssues([])}>
             Continue
           </AlertDialogAction>
         </AlertDialogFooter>

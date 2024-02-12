@@ -9,6 +9,7 @@ import { useSetAtom } from "jotai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { v4 as uuid } from "uuid";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -38,7 +39,7 @@ export function AddIssueButton() {
 
   function handleSubmit(data: AddIssue) {
     const newIssue: Issue = {
-      id: Math.random().toString(),
+      id: uuid(),
       name: data.name,
       startTime: data.startTime,
       endTime: data.endTime,

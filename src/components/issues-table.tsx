@@ -1,8 +1,8 @@
 import { getWorkTime } from "@/lib/issues";
 import { Issue } from "@/lib/types";
-import { IssuesTableActions } from "./issues-table-actions";
+import { IssuesTableDropdown } from "./issues-table-dropdown";
 import {
-  Table,
+  Table as ShadCnTable,
   TableBody,
   TableCell,
   TableHead,
@@ -12,7 +12,7 @@ import {
 
 export function IssuesTable({ issues }: { issues: Issue[] }) {
   return (
-    <Table>
+    <ShadCnTable>
       <TableHeader>
         <TableRow>
           <TableHead>Issue</TableHead>
@@ -35,11 +35,11 @@ export function IssuesTable({ issues }: { issues: Issue[] }) {
               })}
             </TableCell>
             <TableCell>
-              <IssuesTableActions issue={issue} />
+              <IssuesTableDropdown issue={issue} />
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
-    </Table>
+    </ShadCnTable>
   );
 }
