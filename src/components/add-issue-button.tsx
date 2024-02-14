@@ -36,6 +36,11 @@ export function AddIssueButton() {
 
   const form = useForm<AddIssue>({
     resolver: zodResolver(addIssueSchema),
+    defaultValues: {
+      name: Math.random().toString(36).substring(7),
+      startTime: "10:00",
+      endTime: "11:00",
+    },
   });
 
   function handleSubmit(data: AddIssue) {

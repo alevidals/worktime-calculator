@@ -12,6 +12,7 @@ export type Issue = {
 export type GroupedIssue = {
   name: string;
   workTime: number;
+  percentage: number;
 };
 
 export type AddIssue = z.infer<typeof addIssueSchema>;

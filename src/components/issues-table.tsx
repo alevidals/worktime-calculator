@@ -2,7 +2,7 @@ import { formatWorkTimeFromSeconds } from "@/lib/issues";
 import { Issue } from "@/lib/types";
 import { IssuesTableDropdown } from "./issues-table-dropdown";
 import {
-  Table as ShadCnTable,
+  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -12,7 +12,7 @@ import {
 
 export function IssuesTable({ issues }: { issues: Issue[] }) {
   return (
-    <ShadCnTable>
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Issue</TableHead>
@@ -35,6 +35,6 @@ export function IssuesTable({ issues }: { issues: Issue[] }) {
           </TableRow>
         ))}
       </TableBody>
-    </ShadCnTable>
+    </Table>
   );
 }

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">Hello! 🔥</h1>
+        <h1 className="text-lg font-bold">Hello! 🔥</h1>
         <AddIssueButton />
       </div>
       <IssuesTable issues={issues} />
