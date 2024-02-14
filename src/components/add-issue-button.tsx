@@ -6,8 +6,8 @@ import { issuesAtom } from "@/lib/store";
 import { AddIssue, Issue } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { useSetAtom } from "jotai";
-import { useState } from "react";
+import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { v4 as uuid } from "uuid";
@@ -32,14 +32,19 @@ import { Input } from "./ui/input";
 
 export function AddIssueButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const setIssues = useSetAtom(issuesAtom);
+  const [issues, setIssues] = useAtom(issuesAtom);
+
+  useEffect(() => {
+    const startTime = issues.at(-1)?.endTime ?? "";
+    form.setValue("startTime", startTime);
+  }, []);
 
   const form = useForm<AddIssue>({
     resolver: zodResolver(addIssueSchema),
     defaultValues: {
-      name: Math.random().toString(36).substring(7),
-      startTime: "10:00",
-      endTime: "11:00",
+      name: "",
+      startTime: "",
+      endTime: "",
     },
   });
 
