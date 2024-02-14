@@ -1,5 +1,6 @@
 "use client";
 
+import { getSecondsFromTimeRange } from "@/lib/issues";
 import { addIssueSchema } from "@/lib/schema";
 import { issuesAtom } from "@/lib/store";
 import { AddIssue, Issue } from "@/lib/types";
@@ -38,11 +39,17 @@ export function AddIssueButton() {
   });
 
   function handleSubmit(data: AddIssue) {
+    const workTime = getSecondsFromTimeRange({
+      startTime: data.startTime,
+      endTime: data.endTime,
+    });
+
     const newIssue: Issue = {
       id: uuid(),
       name: data.name,
       startTime: data.startTime,
       endTime: data.endTime,
+      workTime,
     };
 
     toast.success("Issue added successfully");

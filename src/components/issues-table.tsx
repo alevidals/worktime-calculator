@@ -1,4 +1,4 @@
-import { getWorkTime } from "@/lib/issues";
+import { formatWorkTimeFromSeconds } from "@/lib/issues";
 import { Issue } from "@/lib/types";
 import { IssuesTableDropdown } from "./issues-table-dropdown";
 import {
@@ -28,12 +28,7 @@ export function IssuesTable({ issues }: { issues: Issue[] }) {
             <TableCell>{issue.name}</TableCell>
             <TableCell>{issue.startTime}</TableCell>
             <TableCell>{issue.endTime}</TableCell>
-            <TableCell>
-              {getWorkTime({
-                startTime: issue.startTime,
-                endTime: issue.endTime,
-              })}
-            </TableCell>
+            <TableCell>{formatWorkTimeFromSeconds(issue.workTime)}</TableCell>
             <TableCell>
               <IssuesTableDropdown issue={issue} />
             </TableCell>

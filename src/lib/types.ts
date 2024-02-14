@@ -6,6 +6,12 @@ export type Issue = {
   name: string;
   startTime: string;
   endTime: string;
+  workTime: number;
+};
+
+export type GroupedIssue = {
+  name: string;
+  workTime: number;
 };
 
 export type AddIssue = z.infer<typeof addIssueSchema>;
