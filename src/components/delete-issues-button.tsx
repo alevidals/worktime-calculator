@@ -14,17 +14,13 @@ import {
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
 
-export function DeleteIssuesButton() {
+export function DeleteIssuesButton({ className }: { className?: string }) {
   const setIssues = useSetAtom(issuesAtom);
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          size="icon"
-          variant="destructive"
-          className="fixed bottom-4 right-4"
-        >
+        <Button size="icon" variant="destructive" className={className}>
           <TrashIcon className="w-5 h-5" />
         </Button>
       </AlertDialogTrigger>

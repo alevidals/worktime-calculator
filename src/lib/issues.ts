@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
+import { GroupedIssue, Issue } from "./types";
 
-export function getWorkTime({
+export function getSecondsFromTimeRange({
   startTime,
   endTime,
 }: {
@@ -10,7 +11,8 @@ export function getWorkTime({
   const splittedStartTime = startTime.split(":");
   const splittedEndTime = endTime.split(":");
 
-  if (splittedStartTime.length !== 2 || splittedEndTime.length !== 2) return;
+  if (splittedStartTime.length !== 2 || splittedEndTime.length !== 2)
+    throw new Error();
 
   const startDateTime = dayjs()
     .hour(Number(splittedStartTime[0]))
@@ -20,12 +22,52 @@ export function getWorkTime({
     .hour(Number(splittedEndTime[0]))
     .minute(Number(splittedEndTime[1]));
 
-  if (startDateTime.isAfter(endDateTime)) return;
+  if (startDateTime.isAfter(endDateTime)) throw new Error();
 
-  const totalDifferenceInMinutes = endDateTime.diff(startDateTime, "minutes");
+  const seconds = endDateTime.diff(startDateTime, "seconds");
 
-  const hoursDiff = Math.floor(totalDifferenceInMinutes / 60);
-  const minutesDiff = totalDifferenceInMinutes % 60;
+  return seconds;
+}
+
+export function formatWorkTimeFromSeconds(seconds: number) {
+  const minutes = seconds / 60;
+
+  const hoursDiff = Math.floor(minutes / 60);
+  const minutesDiff = minutes % 60;
 
   return `${hoursDiff}h ${minutesDiff}m`;
+}
+
+export function groupIssues(issues: Issue[]) {
+  const groupedIssues: Record<string, GroupedIssue> = {};
+  const totalWorkTime = issues.reduce((acc, issue) => {
+    return (
+      acc +
+      getSecondsFromTimeRange({
+        startTime: issue.startTime,
+        endTime: issue.endTime,
+      })
+    );
+  }, 0);
+
+  for (const issue of issues) {
+    const workTime = getSecondsFromTimeRange({
+      startTime: issue.startTime,
+      endTime: issue.endTime,
+    });
+
+    if (groupedIssues[issue.name]) {
+      groupedIssues[issue.name].workTime += workTime;
+      groupedIssues[issue.name].percentage =
+        (groupedIssues[issue.name].workTime / totalWorkTime) * 100;
+    } else {
+      groupedIssues[issue.name] = {
+        name: issue.name,
+        workTime: workTime,
+        percentage: (workTime / totalWorkTime) * 100,
+      };
+    }
+  }
+
+  return Object.values(groupedIssues).sort((a, b) => b.workTime - a.workTime);
 }
