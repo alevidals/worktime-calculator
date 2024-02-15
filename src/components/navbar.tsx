@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,9 +14,8 @@ const emojis = ["🔥", "🚀", "🌟", "🌈", "🎉", "🎈", "🎊", "🎁", 
 
 export function Navbar() {
   const pathname = usePathname();
-  const [emoji, setEmoji] = useState(
-    emojis[Math.floor(Math.random() * emojis.length)]
-  );
+
+  const [emoji, setEmoji] = useState(emojis[0]);
 
   return (
     <header>

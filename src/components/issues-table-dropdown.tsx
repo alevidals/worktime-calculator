@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui/input";
+import { getSecondsFromTimeRange } from "@/lib/issues";
 import { addIssueSchema } from "@/lib/schema";
 import { issuesAtom } from "@/lib/store";
 import { AddIssue, Issue } from "@/lib/types";
@@ -64,7 +65,12 @@ export function IssuesTableDropdown({ issue }: { issue: Issue }) {
   function handleSubmit(data: AddIssue) {
     const updatedIssues = issues.map((i) => {
       if (i.id === issue.id) {
-        return { ...i, ...data };
+        const workTime = getSecondsFromTimeRange({
+          startTime: data.startTime,
+          endTime: data.endTime,
+        });
+
+        return { ...i, ...data, workTime };
       }
       return i;
     });
