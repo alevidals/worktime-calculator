@@ -73,7 +73,7 @@ export function AddIssueButton() {
         className="rounded-full"
         onClick={() => setIsOpen(true)}
       >
-        <PlusIcon className="h-5 w-5" />
+        <PlusIcon className="h-4 w-4" />
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>

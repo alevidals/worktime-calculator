@@ -12,7 +12,7 @@ export default function SummaryPage() {
 
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4">Summary</h1>
+      <h1 className="text-2xl font-bold mb-4 h-9 flex items-center">Summary</h1>
       <SummaryTable groupedIssues={groupedIssues} />
     </>
   );
