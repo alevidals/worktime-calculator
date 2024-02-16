@@ -1,5 +1,10 @@
 import dayjs from "dayjs";
-import { GroupedIssue, Issue } from "./types";
+import {
+  ExternalJiraIssue,
+  GroupedIssue,
+  InternalJiraIssue,
+  Issue,
+} from "./types";
 
 export function getSecondsFromTimeRange({
   startTime,
@@ -70,4 +75,14 @@ export function groupIssues(issues: Issue[]) {
   }
 
   return Object.values(groupedIssues).sort((a, b) => b.workTime - a.workTime);
+}
+
+export function formatJiraIssues(issues: ExternalJiraIssue["issues"]) {
+  return issues.map((issue): InternalJiraIssue => {
+    return {
+      id: issue.id,
+      name: issue.fields.summary,
+      key: issue.key,
+    };
+  });
 }
