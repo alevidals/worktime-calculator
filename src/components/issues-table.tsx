@@ -37,7 +37,9 @@ export function IssuesTable() {
       <TableBody>
         {issues.map((issue) => (
           <TableRow key={issue.id}>
-            <TableCell>{issue.name}</TableCell>
+            <TableCell className="w-40 max-w-40 truncate">
+              {issue.name}
+            </TableCell>
             <TableCell>{issue.startTime}</TableCell>
             <TableCell>{issue.endTime}</TableCell>
             <TableCell>{formatWorkTimeFromSeconds(issue.workTime)}</TableCell>

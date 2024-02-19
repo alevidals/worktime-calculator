@@ -35,7 +35,9 @@ export function SummaryTable() {
       <TableBody>
         {groupedIssues.map((issue) => (
           <TableRow key={issue.name}>
-            <TableCell>{issue.name}</TableCell>
+            <TableCell className="w-40 max-w-40 truncate">
+              {issue.name}
+            </TableCell>
             <TableCell>{formatWorkTimeFromSeconds(issue.workTime)}</TableCell>
             <TableCell>{issue.percentage.toFixed(2)}%</TableCell>
           </TableRow>
