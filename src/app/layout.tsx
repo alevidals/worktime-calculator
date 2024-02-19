@@ -1,11 +1,13 @@
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -20,9 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={openSans.className}>
+      <body className={cn(openSans.className, "m-4")}>
         <Navbar />
-        <main className="mt-4 max-w-2xl mx-auto">{children}</main>
+        <main className="mt-4 max-w-xl mx-auto">{children}</main>
         <Toaster />
       </body>
     </html>

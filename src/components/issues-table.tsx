@@ -1,13 +1,16 @@
 "use client";
 
-import { formatWorkTimeFromSeconds } from "@/lib/issues";
+import { formatWorkTimeFromSeconds, getTotalWorkTime } from "@/lib/issues";
 import { issuesAtom } from "@/lib/store";
+import { cn } from "@/lib/utils";
+import dayjs from "dayjs";
 import { useAtomValue } from "jotai";
 import { IssuesTableDropdown } from "./issues-table-dropdown";
 import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -15,6 +18,10 @@ import {
 
 export function IssuesTable() {
   const issues = useAtomValue(issuesAtom);
+
+  const totalWorkTime = getTotalWorkTime(issues);
+
+  const secondsToWork = dayjs().day() !== 5 ? 30600 : 25200;
 
   return (
     <Table>
@@ -40,6 +47,22 @@ export function IssuesTable() {
           </TableRow>
         ))}
       </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TableCell colSpan={4}>Total</TableCell>
+          <TableCell>
+            <span
+              className={cn(
+                totalWorkTime === secondsToWork && "text-green-500 font-bold",
+                totalWorkTime > secondsToWork && "text-red-500 font-extrabold"
+              )}
+            >
+              {formatWorkTimeFromSeconds(totalWorkTime)}
+            </span>{" "}
+            / {formatWorkTimeFromSeconds(secondsToWork)}
+          </TableCell>
+        </TableRow>
+      </TableFooter>
     </Table>
   );
 }

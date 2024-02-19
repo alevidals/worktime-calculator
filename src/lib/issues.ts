@@ -38,10 +38,7 @@ export function formatWorkTimeFromSeconds(seconds: number) {
   return `${hoursDiff}h ${minutesDiff}m`;
 }
 
-export function groupIssues(issues: Issue[]) {
-  if (!issues) return [];
-
-  const groupedIssues: Record<string, GroupedIssue> = {};
+export function getTotalWorkTime(issues: Issue[]) {
   const totalWorkTime = issues.reduce((acc, issue) => {
     return (
       acc +
@@ -51,6 +48,15 @@ export function groupIssues(issues: Issue[]) {
       })
     );
   }, 0);
+
+  return totalWorkTime;
+}
+
+export function groupIssues(issues: Issue[]) {
+  if (!issues) return [];
+
+  const groupedIssues: Record<string, GroupedIssue> = {};
+  const totalWorkTime = getTotalWorkTime(issues);
 
   for (const issue of issues) {
     const workTime = getSecondsFromTimeRange({

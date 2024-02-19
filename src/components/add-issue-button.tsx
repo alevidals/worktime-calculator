@@ -69,7 +69,7 @@ export function AddIssueButton() {
     <>
       <Button
         size="icon"
-        variant="ghost"
+        // variant="ghost"
         className="rounded-full"
         onClick={() => setIsOpen(true)}
       >
