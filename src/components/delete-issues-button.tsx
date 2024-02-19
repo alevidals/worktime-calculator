@@ -1,3 +1,5 @@
+"use client";
+
 import { issuesAtom } from "@/lib/store";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useSetAtom } from "jotai";

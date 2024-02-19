@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -6,14 +8,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatWorkTimeFromSeconds } from "@/lib/issues";
-import { GroupedIssue } from "@/lib/types";
+import { formatWorkTimeFromSeconds, groupIssues } from "@/lib/issues";
+import { issuesAtom } from "@/lib/store";
+import { useAtomValue } from "jotai";
 
-export function SummaryTable({
-  groupedIssues,
-}: {
-  groupedIssues: GroupedIssue[];
-}) {
+export function SummaryTable() {
+  const issues = useAtomValue(issuesAtom);
+
+  const groupedIssues = groupIssues(issues);
+
   return (
     <Table>
       <TableHeader>

@@ -39,6 +39,8 @@ export function formatWorkTimeFromSeconds(seconds: number) {
 }
 
 export function groupIssues(issues: Issue[]) {
+  if (!issues) return [];
+
   const groupedIssues: Record<string, GroupedIssue> = {};
   const totalWorkTime = issues.reduce((acc, issue) => {
     return (

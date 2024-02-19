@@ -1,5 +1,8 @@
+"use client";
+
 import { formatWorkTimeFromSeconds } from "@/lib/issues";
-import { Issue } from "@/lib/types";
+import { issuesAtom } from "@/lib/store";
+import { useAtomValue } from "jotai";
 import { IssuesTableDropdown } from "./issues-table-dropdown";
 import {
   Table,
@@ -10,7 +13,9 @@ import {
   TableRow,
 } from "./ui/table";
 
-export function IssuesTable({ issues }: { issues: Issue[] }) {
+export function IssuesTable() {
+  const issues = useAtomValue(issuesAtom);
+
   return (
     <Table>
       <TableHeader>
