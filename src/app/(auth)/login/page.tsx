@@ -7,5 +7,14 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage() {
-  return <LoginForm />;
+  return (
+    <div className="flex-1">
+      <LoginForm />
+      <div className="mt-4">
+        <a href="/register" className="underline text-sm">
+          Don&apos;t have an account? Register now!
+        </a>
+      </div>
+    </div>
+  );
 }
