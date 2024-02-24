@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { insertIssueSchema } from "@/lib/schemas/issues";
+import { insertIssueSchema, updateIssueSchema } from "@/lib/schemas/issues";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DotsHorizontalIcon,
@@ -51,7 +51,7 @@ export function IssuesTableDropdown({ issue }: { issue: Issue }) {
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
 
   const form = useForm<UpdateIssue>({
-    resolver: zodResolver(insertIssueSchema),
+    resolver: zodResolver(updateIssueSchema),
     defaultValues: issue,
   });
 
