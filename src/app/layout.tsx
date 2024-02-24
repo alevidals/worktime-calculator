@@ -1,9 +1,9 @@
-import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
+import { TailwindIndicator } from "@/components/tailwind-indicador";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -22,10 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(openSans.className, "m-4")}>
-        <Navbar />
-        <main className="mt-4 max-w-xl mx-auto">{children}</main>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          openSans.className
+        )}
+      >
+        <main>{children}</main>
         <Toaster />
+        <TailwindIndicator />
       </body>
     </html>
   );

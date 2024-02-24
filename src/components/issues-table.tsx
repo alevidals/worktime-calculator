@@ -1,10 +1,12 @@
 "use client";
 
-import { formatWorkTimeFromSeconds, getTotalWorkTime } from "@/lib/issues";
-import { issuesAtom } from "@/lib/store";
+import {
+  formatWorkTimeFromRange,
+  formatWorkTimeFromSeconds,
+  getTotalWorkTime,
+} from "@/lib/issues";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
-import { useAtomValue } from "jotai";
 import { IssuesTableDropdown } from "./issues-table-dropdown";
 import {
   Table,
@@ -15,10 +17,13 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { Issue } from "@/lib/types/issue";
 
-export function IssuesTable() {
-  const issues = useAtomValue(issuesAtom);
+type Props = {
+  issues: Issue[];
+};
 
+export function IssuesTable({ issues }: Props) {
   const totalWorkTime = getTotalWorkTime(issues);
 
   const secondsToWork = dayjs().day() !== 5 ? 30600 : 25200;
@@ -40,9 +45,14 @@ export function IssuesTable() {
             <TableCell className="w-40 max-w-40 truncate">
               {issue.name}
             </TableCell>
-            <TableCell>{issue.startTime}</TableCell>
-            <TableCell>{issue.endTime}</TableCell>
-            <TableCell>{formatWorkTimeFromSeconds(issue.workTime)}</TableCell>
+            <TableCell>{issue.start_time}</TableCell>
+            <TableCell>{issue.end_time}</TableCell>
+            <TableCell>
+              {formatWorkTimeFromRange({
+                startTime: issue.start_time,
+                endTime: issue.end_time,
+              })}
+            </TableCell>
             <TableCell>
               <IssuesTableDropdown issue={issue} />
             </TableCell>

@@ -1,16 +1,11 @@
 "use client";
 
-import { getSecondsFromTimeRange } from "@/lib/issues";
-import { addIssueSchema } from "@/lib/schema";
-import { issuesAtom } from "@/lib/store";
-import { AddIssue, Issue } from "@/lib/types";
+import { insertIssueSchema } from "@/lib/schemas/issues";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { useSetAtom } from "jotai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { v4 as uuid } from "uuid";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -29,37 +24,37 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
+import { InsertIssue } from "@/lib/types/issue";
+import { insertIssue } from "@/lib/actions/issues";
 
-export function AddIssueButton() {
+type Props = {
+  dateId: string;
+};
+
+export function AddIssueButton({ dateId }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const setIssues = useSetAtom(issuesAtom);
 
-  const form = useForm<AddIssue>({
-    resolver: zodResolver(addIssueSchema),
+  const form = useForm<InsertIssue>({
+    resolver: zodResolver(insertIssueSchema),
     defaultValues: {
       name: "",
-      startTime: "",
-      endTime: "",
+      start_time: "",
+      end_time: "",
+      date_id: dateId,
     },
   });
 
-  function handleSubmit(data: AddIssue) {
-    const workTime = getSecondsFromTimeRange({
-      startTime: data.startTime,
-      endTime: data.endTime,
+  async function handleSubmit(data: InsertIssue) {
+    const { success } = await insertIssue({
+      ...data,
+      date_id: dateId,
     });
 
-    const newIssue: Issue = {
-      id: uuid(),
-      name: data.name,
-      startTime: data.startTime,
-      endTime: data.endTime,
-      workTime,
-    };
-
-    toast.success("Issue added successfully");
-
-    setIssues((prev) => [...prev, newIssue]);
+    if (success) {
+      toast.success("Issue added successfully");
+    } else {
+      toast.error("Something went wrong");
+    }
 
     setIsOpen(false);
     form.reset();
@@ -69,7 +64,6 @@ export function AddIssueButton() {
     <>
       <Button
         size="icon"
-        // variant="ghost"
         className="rounded-full"
         onClick={() => setIsOpen(true)}
       >
@@ -106,7 +100,7 @@ export function AddIssueButton() {
               <div className="flex items-center gap-x-4">
                 <FormField
                   control={form.control}
-                  name="startTime"
+                  name="start_time"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Start Time</FormLabel>
@@ -119,7 +113,7 @@ export function AddIssueButton() {
                 />
                 <FormField
                   control={form.control}
-                  name="endTime"
+                  name="end_time"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>End Time</FormLabel>
