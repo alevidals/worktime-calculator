@@ -28,11 +28,11 @@ export function AddDateButton() {
   });
 
   async function handleSubmit(data: InsertDate) {
-    const { success } = await insertDate(data);
+    const algo = await insertDate(data);
 
-    if (success) {
-      toast.success("Date added successfully");
-    } else {
+    if (!algo) return;
+
+    if (!algo.success) {
       toast.error("Something went wrong");
     }
 

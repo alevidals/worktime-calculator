@@ -18,9 +18,13 @@ export async function insertDate(data: InsertDate) {
 
   const supabase = createClient();
 
-  const { error } = await supabase.from("dates").insert({
-    date: format(parseResult.data.date, "YYYY-MM-DD"),
-  });
+  const { data: date, error } = await supabase
+    .from("dates")
+    .insert({
+      date: format(parseResult.data.date, "YYYY-MM-DD"),
+    })
+    .select("id")
+    .single();
 
   if (error) {
     return {
@@ -28,11 +32,7 @@ export async function insertDate(data: InsertDate) {
     };
   }
 
-  revalidatePath("/", "layout");
-
-  return {
-    success: true,
-  };
+  return redirect(`/issues/${date.id}`);
 }
 
 export async function deleteDate(id: string) {
