@@ -40,6 +40,7 @@ export function AddIssueButton({ dateId }: Props) {
       name: "",
       start_time: "",
       end_time: "",
+      date_id: dateId,
     },
   });
 

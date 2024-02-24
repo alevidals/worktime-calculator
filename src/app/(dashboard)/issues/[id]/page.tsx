@@ -1,4 +1,5 @@
 import { AddIssueButton } from "@/components/add-issue-button";
+import { DateActionsButton } from "@/components/date-actions-button";
 import { IssuesTable } from "@/components/issues-table";
 import { createClient } from "@/lib/supabase/server";
 
@@ -11,7 +12,7 @@ type Props = {
 export default async function IssuesPage({ params: { id } }: Props) {
   const supabase = createClient();
 
-  const { data } = await supabase
+  const { data: issues } = await supabase
     .from("issues")
     .select("id, name, start_time, end_time")
     .eq("date_id", id)
@@ -19,10 +20,11 @@ export default async function IssuesPage({ params: { id } }: Props) {
 
   return (
     <>
-      <div className="mb-4">
+      <div className="flex items-center justify-between mb-4">
         <AddIssueButton dateId={id} />
+        <DateActionsButton dateId={id} />
       </div>
-      {data ? <IssuesTable issues={data} /> : <p>No issues found</p>}
+      {issues ? <IssuesTable issues={issues} /> : <p>No issues found</p>}
     </>
   );
 }

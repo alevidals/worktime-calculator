@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Login, Register } from "@/lib/types/auth";
 import { loginSchema, signUpSchema } from "../schemas/auth";
-import { parse } from "path";
 
 export async function login(data: Login) {
   const parseResult = loginSchema.safeParse(data);
@@ -44,4 +43,12 @@ export async function signup(data: Register) {
 
   revalidatePath("/", "layout");
   redirect("/");
+}
+
+export async function signOut() {
+  const supabase = createClient();
+
+  await supabase.auth.signOut();
+
+  redirect("/login");
 }

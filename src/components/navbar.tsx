@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { HeaderLink } from "./header-link";
+import { NavbarDropdown } from "./navbar-dropdown";
 
 const links = [
   { href: "/", label: "Home" },
@@ -7,18 +9,17 @@ const links = [
 
 export function Navbar() {
   return (
-    <header className="max-w-xl mx-auto rounded-full bg-foreground py-3 px-4">
-      <nav>
-        <div className="flex items-center justify-between max-w-2xl mx-auto">
-          <h1 className="text-sm font-semibold text-white select-none cursor-pointer">
-            WTC
-          </h1>
-          <div>
-            {links.map(({ href, label }) => (
-              <HeaderLink key={href} href={href} label={label} />
-            ))}
-          </div>
+    <header className="max-w-xl mx-auto rounded-full bg-foreground py-3 px-4 h-14">
+      <nav className="flex items-center justify-between max-w-3xl mx-auto h-full">
+        <Link href="/" className="text-sm font-semibold text-white select-none">
+          WTC
+        </Link>
+        <div>
+          {links.map(({ href, label }) => (
+            <HeaderLink key={href} href={href} label={label} />
+          ))}
         </div>
+        <NavbarDropdown />
       </nav>
     </header>
   );

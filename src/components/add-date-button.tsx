@@ -14,18 +14,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "./ui/form";
+} from "@/components/ui/dialog";
+import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Calendar } from "@/components/ui/calendar";
-import { z } from "zod";
-import { inserDate } from "@/lib/actions/dates";
+import { insertDate } from "@/lib/actions/dates";
 import { toast } from "sonner";
 
 export function AddDateButton() {
@@ -36,7 +28,7 @@ export function AddDateButton() {
   });
 
   async function handleSubmit(data: InsertDate) {
-    const { success } = await inserDate(data);
+    const { success } = await insertDate(data);
 
     if (success) {
       toast.success("Date added successfully");
