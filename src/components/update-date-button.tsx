@@ -64,7 +64,7 @@ export function UpdateDateButton({ dateId, date }: Props) {
   return isDesktop ? (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button size="icon" className="rounded-full" variant="secondary">
+        <Button size="icon" className="rounded-xl" variant="secondary">
           <Pencil1Icon className="w-4 h-4" />
         </Button>
       </AlertDialogTrigger>
@@ -103,7 +103,7 @@ export function UpdateDateButton({ dateId, date }: Props) {
   ) : (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button size="icon" className="rounded-full" variant="secondary">
+        <Button size="icon" className="rounded-xl" variant="secondary">
           <Pencil1Icon className="w-4 h-4" />
         </Button>
       </DrawerTrigger>

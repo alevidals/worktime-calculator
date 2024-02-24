@@ -64,7 +64,7 @@ export function AddIssueButton({ dateId }: Props) {
     <>
       <Button
         size="icon"
-        className="rounded-full"
+        className="rounded-xl"
         onClick={() => setIsOpen(true)}
       >
         <PlusIcon className="h-4 w-4" />

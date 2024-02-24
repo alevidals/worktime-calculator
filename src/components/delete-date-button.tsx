@@ -42,7 +42,7 @@ export function DeleteDateButton({ dateId }: Props) {
   return isDesktop ? (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button size="icon" className="rounded-full" variant="destructive">
+        <Button size="icon" className="rounded-xl" variant="destructive">
           <TrashIcon className="w-4 h-4" />
         </Button>
       </AlertDialogTrigger>
@@ -67,7 +67,7 @@ export function DeleteDateButton({ dateId }: Props) {
   ) : (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button size="icon" className="rounded-full" variant="destructive">
+        <Button size="icon" className="rounded-xl" variant="destructive">
           <TrashIcon className="w-4 h-4" />
         </Button>
       </DrawerTrigger>

@@ -28,11 +28,11 @@ export function AddDateButton() {
   });
 
   async function handleSubmit(data: InsertDate) {
-    const algo = await insertDate(data);
+    const response = await insertDate(data);
 
-    if (!algo) return;
+    if (!response) return;
 
-    if (!algo.success) {
+    if (!response.success) {
       toast.error("Something went wrong");
     }
 
@@ -43,7 +43,7 @@ export function AddDateButton() {
     <>
       <Button
         size="icon"
-        className="rounded-full"
+        className="rounded-xl"
         onClick={() => setIsOpen(true)}
       >
         <PlusIcon className="h-4 w-4" />

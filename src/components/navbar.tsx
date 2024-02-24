@@ -9,7 +9,7 @@ const links = [
 
 export function Navbar() {
   return (
-    <header className="max-w-xl mx-auto rounded-full bg-foreground py-3 px-4 h-14">
+    <header className="max-w-xl mx-auto rounded-xl bg-foreground py-3 px-4 h-14">
       <nav className="flex items-center justify-between max-w-3xl mx-auto h-full">
         <Link href="/" className="text-sm font-semibold text-white select-none">
           WTC
