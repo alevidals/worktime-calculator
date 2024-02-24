@@ -1,15 +1,11 @@
 import { Input } from "@/components/ui/input";
-import { getSecondsFromTimeRange } from "@/lib/issues";
-import { addIssueSchema } from "@/lib/schema";
-import { issuesAtom } from "@/lib/store";
-import { AddIssue, Issue } from "@/lib/types";
+import { insertIssueSchema } from "@/lib/schemas/issues";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DotsHorizontalIcon,
   Pencil1Icon,
   TrashIcon,
 } from "@radix-ui/react-icons";
-import { useAtom } from "jotai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -46,35 +42,38 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
+import { Issue, UpdateIssue } from "@/lib/types/issue";
+import { toast } from "sonner";
+import { deleteIssue, updateIssue } from "@/lib/actions/issues";
 
 export function IssuesTableDropdown({ issue }: { issue: Issue }) {
   const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);
   const [isOpenEditDialog, setIsOpenEditDialog] = useState(false);
-  const [issues, setIssues] = useAtom(issuesAtom);
 
-  const form = useForm<AddIssue>({
-    resolver: zodResolver(addIssueSchema),
+  const form = useForm<UpdateIssue>({
+    resolver: zodResolver(insertIssueSchema),
     defaultValues: issue,
   });
 
-  function handleDeleteIssue() {
-    const updatedIssues = issues.filter((i) => i.id !== issue.id);
-    setIssues(updatedIssues);
+  async function handleDeleteIssue() {
+    const { success } = await deleteIssue(issue.id);
+
+    if (success) {
+      toast.success("Issue deleted successfully");
+    } else {
+      toast.error("Something went wrong");
+    }
   }
 
-  function handleSubmit(data: AddIssue) {
-    const updatedIssues = issues.map((i) => {
-      if (i.id === issue.id) {
-        const workTime = getSecondsFromTimeRange({
-          startTime: data.startTime,
-          endTime: data.endTime,
-        });
+  async function handleEditIssue(data: UpdateIssue) {
+    const { success } = await updateIssue(issue.id, data);
 
-        return { ...i, ...data, workTime };
-      }
-      return i;
-    });
-    setIssues(updatedIssues);
+    if (success) {
+      toast.success("Issue updated successfully");
+    } else {
+      toast.error("Something went wrong");
+    }
+
     setIsOpenEditDialog(false);
   }
 
@@ -90,17 +89,17 @@ export function IssuesTableDropdown({ issue }: { issue: Issue }) {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
             className="flex items-center justify-between"
-            onClick={() => setIsOpenConfirmDialog(true)}
-          >
-            Delete
-            <TrashIcon className="w-5 h-5 text-red-700" />
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="flex items-center justify-between"
             onClick={() => setIsOpenEditDialog(true)}
           >
             Edit
             <Pencil1Icon className="w-5 h-5 text-blue-700" />
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex items-center justify-between"
+            onClick={() => setIsOpenConfirmDialog(true)}
+          >
+            Delete
+            <TrashIcon className="w-5 h-5 text-red-700" />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -137,7 +136,7 @@ export function IssuesTableDropdown({ issue }: { issue: Issue }) {
 
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(handleSubmit)}
+              onSubmit={form.handleSubmit(handleEditIssue)}
               className="flex flex-col gap-y-4"
             >
               <FormField
@@ -156,7 +155,7 @@ export function IssuesTableDropdown({ issue }: { issue: Issue }) {
               <div className="flex items-center gap-x-4">
                 <FormField
                   control={form.control}
-                  name="startTime"
+                  name="start_time"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>Start Time</FormLabel>
@@ -169,7 +168,7 @@ export function IssuesTableDropdown({ issue }: { issue: Issue }) {
                 />
                 <FormField
                   control={form.control}
-                  name="endTime"
+                  name="end_time"
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel>End Time</FormLabel>

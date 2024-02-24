@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
-import { GroupedIssue, Issue } from "./types";
+import { GroupedIssue } from "./types";
+import { Issue } from "./types/issue";
 
-export function getSecondsFromTimeRange({
+function getSecondsFromTimeRange({
   startTime,
   endTime,
 }: {
@@ -11,7 +12,7 @@ export function getSecondsFromTimeRange({
   const splittedStartTime = startTime.split(":");
   const splittedEndTime = endTime.split(":");
 
-  if (splittedStartTime.length !== 2 || splittedEndTime.length !== 2)
+  if (splittedStartTime.length !== 3 || splittedEndTime.length !== 3)
     throw new Error();
 
   const startDateTime = dayjs()
@@ -29,6 +30,20 @@ export function getSecondsFromTimeRange({
   return seconds;
 }
 
+export function formatWorkTimeFromRange({
+  startTime,
+  endTime,
+}: {
+  startTime: string;
+  endTime: string;
+}) {
+  const seconds = getSecondsFromTimeRange({ startTime, endTime });
+
+  const format = formatWorkTimeFromSeconds(seconds);
+
+  return format;
+}
+
 export function formatWorkTimeFromSeconds(seconds: number) {
   const minutes = seconds / 60;
 
@@ -43,8 +58,8 @@ export function getTotalWorkTime(issues: Issue[]) {
     return (
       acc +
       getSecondsFromTimeRange({
-        startTime: issue.startTime,
-        endTime: issue.endTime,
+        startTime: issue.start_time,
+        endTime: issue.end_time,
       })
     );
   }, 0);
@@ -60,8 +75,8 @@ export function groupIssues(issues: Issue[]) {
 
   for (const issue of issues) {
     const workTime = getSecondsFromTimeRange({
-      startTime: issue.startTime,
-      endTime: issue.endTime,
+      startTime: issue.start_time,
+      endTime: issue.end_time,
     });
 
     if (groupedIssues[issue.name]) {

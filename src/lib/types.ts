@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { addIssueSchema } from "./schema";
+import { addIssueSchema, loginSchema } from "./schema";
 
 export type Issue = {
   id: string;
@@ -15,4 +15,6 @@ export type GroupedIssue = {
   percentage: number;
 };
 
+// Schemas
 export type AddIssue = z.infer<typeof addIssueSchema>;
+export type Login = z.infer<typeof loginSchema>;
