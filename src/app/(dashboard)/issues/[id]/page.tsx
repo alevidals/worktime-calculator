@@ -21,7 +21,7 @@ export default async function IssuesPage({ params: { id } }: Props) {
   return (
     <>
       <div className="flex items-center justify-between mb-4">
-        <AddIssueButton dateId={id} />
+        <AddIssueButton />
         <DateActionsButton dateId={id} />
       </div>
       {issues ? <IssuesTable issues={issues} /> : <p>No issues found</p>}

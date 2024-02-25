@@ -1,7 +1,7 @@
 "use client";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { deleteDate, updateDate } from "@/lib/actions/dates";
+import { updateDate } from "@/lib/actions/dates";
 import { updateDateSchema } from "@/lib/schemas/dates";
 import { UpdateDate } from "@/lib/types/dates";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,15 +32,18 @@ import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
+import { useParams } from "next/navigation";
 
 type Props = {
-  dateId: string;
   date: string;
 };
 
-export function UpdateDateButton({ dateId, date }: Props) {
+export function UpdateDateButton({ date }: Props) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const params = useParams();
+  const dateId = params.id as string;
 
   const form = useForm<UpdateDate>({
     resolver: zodResolver(updateDateSchema),

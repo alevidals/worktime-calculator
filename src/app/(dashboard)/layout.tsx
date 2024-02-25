@@ -1,3 +1,4 @@
+import { CommandMenu } from "@/components/command-menu";
 import { Navbar } from "@/components/navbar";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -19,6 +20,7 @@ export default async function DashboardLayout({
     <div className="p-4 min-h-dvh">
       <Navbar />
       <main className="max-w-xl mt-4 mx-auto">{children}</main>
+      <CommandMenu />
     </div>
   );
 }

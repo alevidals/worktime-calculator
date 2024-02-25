@@ -22,8 +22,8 @@ export async function DateActionsButton({ dateId }: Props) {
 
   return (
     <div className="space-x-4">
-      <UpdateDateButton dateId={dateId} date={data.date} />
-      <DeleteDateButton dateId={dateId} />
+      <UpdateDateButton date={data.date} />
+      <DeleteDateButton />
     </div>
   );
 }

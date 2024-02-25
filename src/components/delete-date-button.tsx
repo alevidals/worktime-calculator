@@ -26,14 +26,14 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { useParams } from "next/navigation";
 
-type Props = {
-  dateId: string;
-};
-
-export function DeleteDateButton({ dateId }: Props) {
+export function DeleteDateButton() {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const params = useParams();
+  const dateId = params.id as string;
 
   async function handleDeleteDate() {
     await deleteDate(dateId);
