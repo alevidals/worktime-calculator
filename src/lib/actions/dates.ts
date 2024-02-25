@@ -1,11 +1,11 @@
 "use server";
 
+import { format } from "@formkit/tempo";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { insertDateSchema } from "../schemas/dates";
 import { createClient } from "../supabase/server";
 import { InsertDate, UpdateDate } from "../types/dates";
-import { format } from "@formkit/tempo";
-import { insertDateSchema } from "../schemas/dates";
-import { redirect } from "next/navigation";
 
 export async function insertDate(data: InsertDate) {
   const parseResult = insertDateSchema.safeParse(data);
@@ -47,10 +47,6 @@ export async function deleteDate(id: string) {
   }
 
   redirect("/");
-
-  return {
-    success: true,
-  };
 }
 
 export async function updateDate(id: string, data: UpdateDate) {

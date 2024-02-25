@@ -1,5 +1,3 @@
-import { Database } from "@/lib/types/supabase";
-
 // export type InsertDate = Pick<
 //   Database["public"]["Tables"]["dates"]["Row"],
 //   "date"

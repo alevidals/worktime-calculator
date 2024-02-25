@@ -1,12 +1,10 @@
-import { format } from "@formkit/tempo";
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { format } from "@formkit/tempo";
 
 type Props = {
   date: string;

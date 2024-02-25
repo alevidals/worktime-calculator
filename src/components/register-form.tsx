@@ -1,9 +1,6 @@
 "use client";
 
-import { signUpSchema } from "@/lib/schemas/auth";
-import { Register } from "@/lib/types/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,8 +10,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { signup } from "@/lib/actions/auth";
+import { signUpSchema } from "@/lib/schemas/auth";
+import { Register } from "@/lib/types/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 export function RegisterForm() {
   const form = useForm<Register>({

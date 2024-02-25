@@ -1,9 +1,6 @@
 import { AddDateButton } from "@/components/add-date-button";
-import { AddIssueButton } from "@/components/add-issue-button";
-import { CardDate } from "@/components/card-date";
 import { DatesGrid } from "@/components/dates-grid";
 import { createClient } from "@/lib/supabase/server";
-import Link from "next/link";
 
 export default async function Home() {
   const supabase = createClient();
@@ -17,7 +14,7 @@ export default async function Home() {
     issues (
       id
     )
-  `
+  `,
     )
     .order("date", { ascending: true });
 

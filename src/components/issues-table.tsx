@@ -1,14 +1,6 @@
 "use client";
 
 import {
-  formatWorkTimeFromRange,
-  formatWorkTimeFromSeconds,
-  getTotalWorkTime,
-} from "@/lib/issues";
-import { cn } from "@/lib/utils";
-import dayjs from "dayjs";
-import { IssuesTableDropdown } from "./issues-table-dropdown";
-import {
   Table,
   TableBody,
   TableCell,
@@ -17,7 +9,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  formatWorkTimeFromRange,
+  formatWorkTimeFromSeconds,
+  getTotalWorkTime,
+} from "@/lib/issues";
 import { Issue } from "@/lib/types/issue";
+import { cn } from "@/lib/utils";
+import dayjs from "dayjs";
+import { IssuesTableDropdown } from "./issues-table-dropdown";
 
 type Props = {
   issues: Issue[];
@@ -66,7 +66,7 @@ export function IssuesTable({ issues }: Props) {
             <span
               className={cn(
                 totalWorkTime === secondsToWork && "text-green-500 font-bold",
-                totalWorkTime > secondsToWork && "text-red-500 font-extrabold"
+                totalWorkTime > secondsToWork && "text-red-500 font-extrabold",
               )}
             >
               {formatWorkTimeFromSeconds(totalWorkTime)}

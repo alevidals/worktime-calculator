@@ -1,8 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { AddIssueDialog } from "./add-issue-dialog";
 
 export function AddIssueButton() {

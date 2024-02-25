@@ -1,13 +1,3 @@
-import { Input } from "@/components/ui/input";
-import { insertIssueSchema, updateIssueSchema } from "@/lib/schemas/issues";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  DotsHorizontalIcon,
-  Pencil1Icon,
-  TrashIcon,
-} from "@radix-ui/react-icons";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,9 +32,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Issue, UpdateIssue } from "@/lib/types/issue";
-import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 import { deleteIssue, updateIssue } from "@/lib/actions/issues";
+import { updateIssueSchema } from "@/lib/schemas/issues";
+import { Issue, UpdateIssue } from "@/lib/types/issue";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  DotsHorizontalIcon,
+  Pencil1Icon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function IssuesTableDropdown({ issue }: { issue: Issue }) {
   const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);

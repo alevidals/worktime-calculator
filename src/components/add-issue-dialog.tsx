@@ -1,10 +1,4 @@
-import { insertIssue } from "@/lib/actions/issues";
-import { insertIssueSchema } from "@/lib/schemas/issues";
-import { InsertIssue } from "@/lib/types/issue";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useParams } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -22,7 +16,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { insertIssue } from "@/lib/actions/issues";
+import { insertIssueSchema } from "@/lib/schemas/issues";
+import { InsertIssue } from "@/lib/types/issue";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 type Props = {
   open: boolean;

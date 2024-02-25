@@ -1,20 +1,5 @@
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  formatWorkTimeFromSeconds,
-  getTotalWorkTime,
-  groupIssues,
-} from "@/lib/issues";
-
 export function SummaryTable() {
   return (
     <div>

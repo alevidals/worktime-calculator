@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import {
   CalendarIcon,
   ExitIcon,
   FaceIcon,
   PersonIcon,
 } from "@radix-ui/react-icons";
+import { useEffect, useState } from "react";
 
 import {
   CommandDialog,
@@ -20,9 +20,9 @@ import {
 } from "@/components/ui/command";
 import { AddDateDialog } from "./add-date-dialog";
 
+import { signOut } from "@/lib/actions/auth";
 import { usePathname, useRouter } from "next/navigation";
 import { AddIssueDialog } from "./add-issue-dialog";
-import { signOut } from "@/lib/actions/auth";
 
 type Option = "add-date" | "add-issue";
 

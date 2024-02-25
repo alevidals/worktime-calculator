@@ -1,18 +1,5 @@
 "use client";
 
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { deleteDate } from "@/lib/actions/dates";
-import { useState } from "react";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -25,8 +12,21 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { deleteDate } from "@/lib/actions/dates";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export function DeleteDateButton() {
   const [open, setOpen] = useState(false);

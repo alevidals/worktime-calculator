@@ -1,9 +1,9 @@
+import { TailwindIndicator } from "@/components/tailwind-indicador";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
-import { TailwindIndicator } from "@/components/tailwind-indicador";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -25,7 +25,7 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-dvh bg-background font-sans antialiased",
-          openSans.className
+          openSans.className,
         )}
       >
         <main>{children}</main>
