@@ -1,5 +1,6 @@
 import { LoginForm } from "@/components/login-form";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -11,9 +12,9 @@ export default async function LoginPage() {
     <div className="flex-1">
       <LoginForm />
       <div className="mt-4">
-        <a href="/register" className="underline text-sm">
+        <Link href="/register" className="underline text-sm">
           Don&apos;t have an account? Register now!
-        </a>
+        </Link>
       </div>
     </div>
   );
