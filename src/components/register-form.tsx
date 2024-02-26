@@ -14,9 +14,12 @@ import { signup } from "@/lib/actions/auth";
 import { signUpSchema } from "@/lib/schemas/auth";
 import { Register } from "@/lib/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export function RegisterForm() {
+  const [error, setError] = useState<string | undefined>();
+
   const form = useForm<Register>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -27,7 +30,11 @@ export function RegisterForm() {
   });
 
   async function onSubmit(data: Register) {
-    await signup(data);
+    try {
+      await signup(data);
+    } catch (error) {
+      setError((error as Error).message);
+    }
   }
 
   return (
@@ -72,6 +79,7 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
+        {error ? <FormMessage>{error}</FormMessage> : null}
         <Button type="submit" className="w-full">
           Submit
         </Button>

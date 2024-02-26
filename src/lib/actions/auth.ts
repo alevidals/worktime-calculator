@@ -19,7 +19,7 @@ export async function login(data: Login) {
   const { error } = await supabase.auth.signInWithPassword(parseResult.data);
 
   if (error) {
-    redirect("/error");
+    throw new Error(error.message);
   }
 
   revalidatePath("/", "layout");
@@ -38,7 +38,7 @@ export async function signup(data: Register) {
   const { error } = await supabase.auth.signUp(parseResult.data);
 
   if (error) {
-    redirect("/error");
+    throw new Error(error.message);
   }
 
   revalidatePath("/", "layout");

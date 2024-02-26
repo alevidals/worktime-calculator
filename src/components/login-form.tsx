@@ -14,9 +14,12 @@ import { login } from "@/lib/actions/auth";
 import { loginSchema } from "@/lib/schemas/auth";
 import { Login } from "@/lib/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export function LoginForm() {
+  const [error, setError] = useState<string | undefined>();
+
   const form = useForm<Login>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -26,7 +29,11 @@ export function LoginForm() {
   });
 
   async function onSubmit(data: Login) {
-    await login(data);
+    try {
+      await login(data);
+    } catch (error) {
+      setError((error as Error).message);
+    }
   }
 
   return (
@@ -58,6 +65,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
+        {error ? <FormMessage>{error}</FormMessage> : null}
         <Button type="submit" className="w-full">
           Submit
         </Button>
