@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { checkAuth } from "@/lib/actions/auth";
 import { redirect } from "next/navigation";
 
 type AuthLayoutProps = {
@@ -6,13 +6,9 @@ type AuthLayoutProps = {
 };
 
 export default async function AuthLayout({ children }: AuthLayoutProps) {
-  const supabase = createClient();
+  const isAuthenticated = await checkAuth();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (user) {
+  if (isAuthenticated) {
     return redirect("/");
   }
 
