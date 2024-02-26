@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "pnpm dlx @biomejs/biome lint ./src",
-    "lint:fix": "pnpm dlx @biomejs/biome lint src/ --apply",
-    "format": "pnpm dlx @biomejs/biome format ./src",
-    "format:fix": "pnpm dlx @biomejs/biome format ./src --write"
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint src/ --apply",
+    "format": "biome format ./src",
+    "format:fix": "biome format ./src --write"
   },
   "dependencies": {
     "@formkit/tempo": "0.0.11",
