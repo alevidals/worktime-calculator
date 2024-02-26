@@ -1,5 +1,6 @@
 "use client";
 
+import { signup } from "@/app/(auth)/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,7 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signup } from "@/lib/actions/auth";
 import { signUpSchema } from "@/lib/schemas/auth";
 import { Register } from "@/lib/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -1,3 +1,4 @@
+import { deleteIssue, updateIssue } from "@/app/(dashboard)/issues/actions";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,7 +34,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { deleteIssue, updateIssue } from "@/lib/actions/issues";
 import { updateIssueSchema } from "@/lib/schemas/issues";
 import { Issue, UpdateIssue } from "@/lib/types/issue";
 import { zodResolver } from "@hookform/resolvers/zod";
