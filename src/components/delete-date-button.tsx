@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteDate } from "@/app/(dashboard)/dates/actions";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,7 +24,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { deleteDate } from "@/lib/actions/dates";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useParams } from "next/navigation";
 import { useState } from "react";

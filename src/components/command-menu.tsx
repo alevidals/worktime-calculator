@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/command";
 import { AddDateDialog } from "./add-date-dialog";
 
-import { signOut } from "@/lib/actions/auth";
+import { signOut } from "@/app/(auth)/actions";
 import { usePathname, useRouter } from "next/navigation";
 import { AddIssueDialog } from "./add-issue-dialog";
 

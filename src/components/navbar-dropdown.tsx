@@ -1,12 +1,12 @@
 "use client";
 
+import { signOut } from "@/app/(auth)/actions";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "@/lib/actions/auth";
 import { PersonIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 

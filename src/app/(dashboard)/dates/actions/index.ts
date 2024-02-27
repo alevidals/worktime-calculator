@@ -1,11 +1,11 @@
 "use server";
 
+import { insertDateSchema } from "@/lib/schemas/dates";
+import { createClient } from "@/lib/supabase/server";
+import { InsertDate, UpdateDate } from "@/lib/types/dates";
 import { format } from "@formkit/tempo";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { insertDateSchema } from "../schemas/dates";
-import { createClient } from "../supabase/server";
-import { InsertDate, UpdateDate } from "../types/dates";
 
 export async function insertDate(data: InsertDate) {
   const parseResult = insertDateSchema.safeParse(data);

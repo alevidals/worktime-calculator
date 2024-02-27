@@ -1,9 +1,9 @@
 "use server";
 
+import { insertIssueSchema, updateIssueSchema } from "@/lib/schemas/issues";
 import { createClient } from "@/lib/supabase/server";
 import { InsertIssue, UpdateIssue } from "@/lib/types/issue";
 import { revalidatePath } from "next/cache";
-import { insertIssueSchema, updateIssueSchema } from "../schemas/issues";
 
 export async function insertIssue(data: InsertIssue) {
   const parseResult = insertIssueSchema.safeParse(data);

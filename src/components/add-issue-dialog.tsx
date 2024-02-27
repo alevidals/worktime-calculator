@@ -1,5 +1,6 @@
 "use client";
 
+import { insertIssue } from "@/app/(dashboard)/issues/actions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,7 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { insertIssue } from "@/lib/actions/issues";
 import { insertIssueSchema } from "@/lib/schemas/issues";
 import { InsertIssue } from "@/lib/types/issue";
 import { zodResolver } from "@hookform/resolvers/zod";

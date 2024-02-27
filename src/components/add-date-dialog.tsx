@@ -1,5 +1,6 @@
 "use client";
 
+import { insertDate } from "@/app/(dashboard)/dates/actions";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -11,7 +12,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Form, FormField, FormItem } from "@/components/ui/form";
-import { insertDate } from "@/lib/actions/dates";
 import { insertDateSchema } from "@/lib/schemas/dates";
 import { InsertDate } from "@/lib/types/dates";
 import { zodResolver } from "@hookform/resolvers/zod";
