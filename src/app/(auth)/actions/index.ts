@@ -58,7 +58,8 @@ export async function checkAuth() {
 
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
 
-  return !!user;
+  return !(error || !user);
 }

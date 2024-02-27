@@ -1,4 +1,4 @@
-import { checkAuth } from "@/lib/actions/auth";
+import { checkAuth } from "@/app/(auth)/actions";
 import { redirect } from "next/navigation";
 
 type AuthLayoutProps = {

@@ -1,6 +1,6 @@
+import { checkAuth } from "@/app/(auth)/actions";
 import { CommandMenu } from "@/components/command-menu";
 import { Navbar } from "@/components/navbar";
-import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function DashboardLayout({
@@ -8,11 +8,9 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createClient();
+  const isAuthenticated = await checkAuth();
 
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error || !data.user) {
+  if (!isAuthenticated) {
     redirect("/login");
   }
 
