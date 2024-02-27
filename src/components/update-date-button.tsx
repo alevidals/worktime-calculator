@@ -141,7 +141,7 @@ export function UpdateDateButton({ date }: Props) {
             </Button>
           </form>
         </Form>
-        <DrawerFooter className="pt-2">
+        <DrawerFooter>
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>

@@ -11,6 +11,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import {
   Form,
   FormControl,
   FormField,
@@ -19,6 +28,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { insertIssueSchema } from "@/lib/schemas/issues";
 import { InsertIssue } from "@/lib/types/issue";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,6 +43,8 @@ type Props = {
 
 export function AddIssueDialog({ open, onOpenChange }: Props) {
   const params = useParams();
+
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const form = useForm<InsertIssue>({
     resolver: zodResolver(insertIssueSchema),
@@ -57,7 +69,7 @@ export function AddIssueDialog({ open, onOpenChange }: Props) {
     form.reset();
   }
 
-  return (
+  return isDesktop ? (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
@@ -120,5 +132,70 @@ export function AddIssueDialog({ open, onOpenChange }: Props) {
         </Form>
       </DialogContent>
     </Dialog>
+  ) : (
+    <Drawer open={open} onOpenChange={onOpenChange}>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Add issue</DrawerTitle>
+          <DrawerDescription>
+            Fill the form below to add a new issue to the list.
+          </DrawerDescription>
+        </DrawerHeader>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="flex flex-col gap-y-4 px-4"
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center gap-x-4">
+              <FormField
+                control={form.control}
+                name="start_time"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Start Time</FormLabel>
+                    <FormControl>
+                      <Input type="time" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="end_time"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>End Time</FormLabel>
+                    <FormControl>
+                      <Input type="time" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button type="submit">Add registry</Button>
+          </form>
+        </Form>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   );
 }

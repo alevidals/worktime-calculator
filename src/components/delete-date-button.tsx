@@ -82,7 +82,7 @@ export function DeleteDateButton() {
         <Button className="mx-4" onClick={handleDeleteDate}>
           Delete
         </Button>
-        <DrawerFooter className="pt-2">
+        <DrawerFooter>
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
