@@ -1,3 +1,5 @@
+import { getSizeCookie } from "@/lib/cookies";
+import { gridSizes } from "@/lib/utils";
 import Link from "next/link";
 import { CardDate } from "./card-date";
 
@@ -14,8 +16,10 @@ type Props = {
 };
 
 export function DatesGrid({ dates }: Props) {
+  const size = getSizeCookie();
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className={gridSizes[size]}>
       {dates?.map((date) => (
         <Link
           key={date.id}

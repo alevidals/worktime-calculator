@@ -1,16 +1,25 @@
 "use client";
 
 import { signOut } from "@/app/(auth)/actions";
+import { SizeSelector } from "@/components/size-selector";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { PersonIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
-export function NavbarDropdown() {
+type Props = {
+  size: string;
+};
+
+export function NavbarDropdown({ size }: Props) {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
   async function handleSignOut() {
     await signOut();
   }
@@ -21,6 +30,12 @@ export function NavbarDropdown() {
         <PersonIcon className="w-5 h-5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        {isDesktop ? (
+          <>
+            <SizeSelector size={size} />
+            <Separator className="mb-1" />
+          </>
+        ) : null}
         <DropdownMenuItem asChild>
           <Link href="/profile">Profile</Link>
         </DropdownMenuItem>
