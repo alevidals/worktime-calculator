@@ -1,4 +1,4 @@
-import { getSizeCookie } from "@/app/(dashboard)/utils.server";
+import { getSizeCookie } from "@/lib/cookies";
 import { cn, screenSizes } from "@/lib/utils";
 import Link from "next/link";
 import { HeaderLink } from "./header-link";
@@ -15,9 +15,8 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "transition-all duration-200 ease-in-out",
+        "transition-all duration-200 ease-in-out mx-auto rounded-xl bg-foreground py-3 px-4 h-14",
         screenSizes[size],
-        "mx-auto rounded-xl bg-foreground py-3 px-4 h-14",
       )}
     >
       <nav className="flex items-center justify-between max-w-3xl mx-auto h-full">

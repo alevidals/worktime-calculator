@@ -1,4 +1,4 @@
-import { getSizeCookie } from "@/app/(dashboard)/utils.server";
+import { getSizeCookie } from "@/lib/cookies";
 import { gridSizes } from "@/lib/utils";
 import Link from "next/link";
 import { CardDate } from "./card-date";

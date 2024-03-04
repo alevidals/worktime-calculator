@@ -1,7 +1,7 @@
 import { checkAuth } from "@/app/(auth)/actions";
-import { getSizeCookie } from "@/app/(dashboard)/utils.server";
 import { CommandMenu } from "@/components/command-menu";
 import { Navbar } from "@/components/navbar";
+import { getSizeCookie } from "@/lib/cookies";
 import { cn, screenSizes } from "@/lib/utils";
 import { redirect } from "next/navigation";
 
@@ -23,9 +23,8 @@ export default async function DashboardLayout({
       <Navbar />
       <main
         className={cn(
-          "transition-all duration-200 ease-in-out",
+          "transition-all duration-200 ease-in-out mt-4 mx-auto",
           screenSizes[size],
-          "mt-4 mx-auto",
         )}
       >
         {children}
