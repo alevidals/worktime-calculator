@@ -77,7 +77,7 @@ export function AddDateDialog({
               render={({ field }) => (
                 <FormItem className="mx-auto">
                   <Calendar
-                    className=""
+                    ISOWeek
                     weekStartsOn={1}
                     mode="single"
                     selected={field.value}
