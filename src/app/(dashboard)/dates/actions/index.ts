@@ -18,6 +18,8 @@ export async function insertDate(data: InsertDate) {
 
   const supabase = createClient();
 
+  console.log("DATE", parseResult.data.date);
+
   const { data: date, error } = await supabase
     .from("dates")
     .insert({
